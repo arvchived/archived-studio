@@ -276,13 +276,17 @@ async function init3D() {
     const pts = [];
     for (let y = 0; y < H; y += 2) for (let x = 0; x < W; x += 2) if (data[(y * W + x) * 4 + 3] > 128) pts.push(x, y);
     const total = pts.length / 2;
+    // measure the real ink bounds so the word can be fitted tightly
+    let x0 = W, x1 = 0, y0 = H, y1 = 0;
+    for (let j = 0; j < pts.length; j += 2) { const px = pts[j], py = pts[j + 1]; if (px < x0) x0 = px; if (px > x1) x1 = px; if (py < y0) y0 = py; if (py > y1) y1 = py; }
+    const bw = Math.max(1, x1 - x0), cx = (x0 + x1) / 2, cyy = (y0 + y1) / 2;
     const n = Math.min(target, total);
 
     const pos = new Float32Array(n * 3), scat = new Float32Array(n * 3), rnd = new Float32Array(n);
     for (let i = 0; i < n; i++) {
       const k = Math.floor(Math.random() * total);
-      pos[i * 3] = (pts[k * 2] / W - 0.5);
-      pos[i * 3 + 1] = -(pts[k * 2 + 1] / H - 0.5) * (H / W);
+      pos[i * 3] = (pts[k * 2] - cx) / bw;          // -0.5..0.5 across the ink width
+      pos[i * 3 + 1] = -(pts[k * 2 + 1] - cyy) / bw; // same scale vertically, centred
       pos[i * 3 + 2] = (Math.random() - 0.5) * 0.02;
       const r = 5 + Math.random() * 9, th = Math.random() * Math.PI * 2, ph = Math.acos(2 * Math.random() - 1);
       scat[i * 3] = r * Math.sin(ph) * Math.cos(th);
@@ -335,7 +339,7 @@ async function init3D() {
     });
     const points = new THREE.Points(g, mat);
     points.frustumCulled = false;
-    return { points, mat };
+    return { points, mat, aspect: (y1 - y0) / bw };
   }
 
   // place the particle word inside the .hero-word box, centred, as large as the box allows
@@ -344,7 +348,7 @@ async function init3D() {
     const { w, h } = visible(0);
     const r = heroWord.getBoundingClientRect();
     const box = { w: (r.width / window.innerWidth) * w, h: (r.height / window.innerHeight) * h };
-    const textAspect = 340 / 1400;                       // canvas height / width
+    const textAspect = particles.aspect;                 // ink height / ink width
     const scale = Math.min(box.w * 1.0, (box.h * 0.95) / textAspect, 30);
     particles.mat.uniforms.uScale.value = scale;
     const cy = (r.top + r.height / 2 + window.scrollY) / window.innerHeight; // 0..1 from top of the page
