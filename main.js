@@ -349,7 +349,7 @@ async function init3D() {
     const r = heroWord.getBoundingClientRect();
     const box = { w: (r.width / window.innerWidth) * w, h: (r.height / window.innerHeight) * h };
     const textAspect = particles.aspect;                 // ink height / ink width
-    const scale = Math.min(box.w * 1.0, (box.h * 0.95) / textAspect, 30);
+    const scale = Math.min(box.w * 0.92, (box.h * 0.9) / textAspect, 30);
     particles.mat.uniforms.uScale.value = scale;
     const cy = (r.top + r.height / 2 + window.scrollY) / window.innerHeight; // 0..1 from top of the page
     particles.mat.uniforms.uLift.value = (0.5 - cy) * h;
