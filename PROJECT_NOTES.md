@@ -12,8 +12,13 @@ Portfolio for Archived Studio (formerly VANTA): game graphics for Roblox games (
 
 ## Design system
 - Colors: ink `#0C1322`, ink-2 `#16203A`, paper `#E8EBF1`, court yellow `#FFC53D`, volt blue `#3D5CFF`, slate `#8B94A7`.
-- Type (user likes blackletter like Duc De Berry, set lowercase): Grenze Gotisch for headings/wordmark (all lowercase), Anton for stats and prices, Plus Jakarta Sans body, Space Mono for small lowercase labels and running headers.
-- One bold moment: the fixed WebGL canvas. Particles spell ARCHIVED → scatter on scroll → chrome torus knot appears beside the stats → camera flies through 8 work cards. Everything else stays quiet.
+- Type: Grenze Gotisch (blackletter, lowercase) for headings/wordmark, the user's stand-in for Duc De Berry. Montserrat for ALL information text, labels, prices and stats (user wants Gotham family; Gotham has no free web license, Montserrat is the stand-in, 900 = Gotham Black). Anton/Plus Jakarta/Space Mono removed.
+- Hero: particle word 'archived' fills the middle `.hero-word` box (sized from its DOM rect), info frames it top and bottom. Header is a floating pill bar that hides on scroll down.
+- Stats: left 52%, chrome torus knot fills the right half.
+- Flight: full-res images baked with a corner 'archived' signature + shader holographic tiled watermark with a sweeping gold/blue sheen.
+- Grid/lightbox images: `.frame` overlay with tiled watermark (canvas-generated `--wm`) + animated corner signature. Right-click disabled on images.
+- Custom scrollbar (court-yellow thumb on ink).
+- Footer: site/contact columns + policies accordion (DRAFT policies, need owner confirmation: payment, revisions (2 rounds), refunds, usage & credit, privacy).
 - Rendering stops once `.archive` (solid paper) covers the canvas.
 - Reduced motion: no Lenis, no flight section, static scene. No WebGL: `.no-webgl` gradient fallback.
 
@@ -25,8 +30,10 @@ Portfolio for Archived Studio (formerly VANTA): game graphics for Roblox games (
 
 ## Open items
 - Contact: reply card form posts to FormSubmit (`CONTACT_EMAIL` at top of main.js). Email is still a placeholder (user making a business Gmail). First real submission sends a one-time activation email.
-- Discord: japanesefriends. Instagram: @noticdyaa.
+- Discord: japanesefriends. Instagram: @noticedyaa.
 - Websites entry for this site has a drawn mock; swap in a real screenshot later.
+- Live: https://archived-studio.vercel.app (Vercel project archived-studio, auto-deploys from GitHub main).
+- On GitHub the images sit at the repo root (web upload flattened `work/`); `vercel.json` rewrites `/work/:file` to `/:file` so paths still work. Locally they are in `work/`. Claude cannot push yet (GitHub not connected to Claude); updates go through the GitHub web UI or user upload.
 
 ## How to add work
 1. Export webp: full (max 1600px) and `-sm` (max 768px) into `/work`.

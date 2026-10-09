@@ -18,14 +18,14 @@ document.getElementById('yr').textContent = new Date().getFullYear();
 
 /* ---------- Pieces flown through in the 3D archive (same order as the caption) ---------- */
 const PIECES = [
-  { src: 'work/thumb-season5-toronto-sm.webp', name: 'Season 5 launch banner' },
-  { src: 'work/icon-smith-point-guard-sm.webp', name: 'Smith, point guard icon' },
-  { src: 'work/thumb-nathan-smith-sm.webp', name: 'Nathan Smith player feature' },
-  { src: 'work/poster-next-journey-sm.webp', name: 'On to the next journey poster' },
-  { src: 'work/thumb-get-into-the-spirit-sm.webp', name: 'Get Into the Spirit' },
-  { src: 'work/icon-happy-halloween-sm.webp', name: 'Happy Halloween icon' },
-  { src: 'work/thumb-trick-or-treat-sm.webp', name: 'Trick or Treat' },
-  { src: 'work/thumb-season5-intro-sm.webp', name: 'Season 5 player intro' },
+  { src: 'work/thumb-season5-toronto', name: 'Season 5 launch banner' },
+  { src: 'work/icon-smith-point-guard', name: 'Smith, point guard icon' },
+  { src: 'work/thumb-nathan-smith', name: 'Nathan Smith player feature' },
+  { src: 'work/poster-next-journey', name: 'On to the next journey poster' },
+  { src: 'work/thumb-get-into-the-spirit', name: 'Get Into the Spirit' },
+  { src: 'work/icon-happy-halloween', name: 'Happy Halloween icon' },
+  { src: 'work/thumb-trick-or-treat', name: 'Trick or Treat' },
+  { src: 'work/thumb-season5-intro', name: 'Season 5 player intro' },
 ];
 
 /* ---------- Smooth scroll ---------- */
@@ -49,10 +49,38 @@ if (!reduced) {
 
 /* ---------- Nav state ---------- */
 const nav = document.querySelector('.nav');
-ScrollTrigger.create({ start: 40, onUpdate: (s) => nav.classList.toggle('scrolled', s.scroll() > 40) });
-document.querySelectorAll('.archive, .about, .contact').forEach((sec) => {
-  ScrollTrigger.create({ trigger: sec, start: 'top 64px', end: 'bottom 64px', toggleClass: { targets: nav, className: 'on-light' } });
+// tuck the header away while scrolling down, bring it back on any scroll up
+ScrollTrigger.create({
+  start: 0, end: 'max',
+  onUpdate: (s) => nav.classList.toggle('hide', s.direction === 1 && s.scroll() > window.innerHeight * 0.8),
 });
+nav.addEventListener('focusin', () => nav.classList.remove('hide'));
+
+/* ---------- Watermark tile (used over every image) ---------- */
+async function makeWatermarkTile() {
+  try { await document.fonts.load('800 40px "Grenze Gotisch"'); } catch (e) {}
+  const c = document.createElement('canvas');
+  c.width = 680; c.height = 420;
+  const x = c.getContext('2d');
+  x.fillStyle = '#fff';
+  x.textAlign = 'center';
+  x.textBaseline = 'middle';
+  x.translate(c.width / 2, c.height / 2);
+  x.rotate(-0.32);
+  x.font = '800 46px "Grenze Gotisch", serif';
+  for (let row = -3; row <= 3; row++) {
+    for (let col = -2; col <= 2; col++) {
+      x.globalAlpha = row % 2 ? 0.55 : 0.9;
+      x.fillText('archived studio', col * 360 + (row % 2) * 180, row * 92);
+    }
+  }
+  return c;
+}
+const wmTilePromise = makeWatermarkTile().then((c) => {
+  document.documentElement.style.setProperty('--wm', `url(${c.toDataURL('image/png')})`);
+  return c;
+});
+document.addEventListener('contextmenu', (e) => { if (e.target.closest('.frame')) e.preventDefault(); });
 
 /* ---------- Lightbox ---------- */
 const lb = document.getElementById('lightbox');
@@ -77,6 +105,7 @@ const sendBtn = document.getElementById('f-send');
 const direct = document.getElementById('direct-email');
 direct.href = `mailto:${CONTACT_EMAIL}`;
 direct.textContent = CONTACT_EMAIL;
+document.querySelectorAll('.foot-email').forEach((a) => { a.href = `mailto:${CONTACT_EMAIL}`; a.textContent = CONTACT_EMAIL; });
 form.addEventListener('submit', async (e) => {
   e.preventDefault();
   const fields = [...form.querySelectorAll('input[required], select[required], textarea[required]')];
@@ -260,11 +289,18 @@ async function init3D() {
     return { points, mat };
   }
 
+  // place the particle word inside the .hero-word box, centred, as large as the box allows
+  const heroWord = document.querySelector('.hero-word');
   function fitParticles() {
     const { w, h } = visible(0);
-    particles.mat.uniforms.uScale.value = Math.min(13, w * 0.9);
-    particles.mat.uniforms.uLift.value = isSmall() ? h * 0.16 : h * 0.12;
-    particles.mat.uniforms.uSize.value = 26 * dpr();
+    const r = heroWord.getBoundingClientRect();
+    const box = { w: (r.width / window.innerWidth) * w, h: (r.height / window.innerHeight) * h };
+    const textAspect = 340 / 1400;                       // canvas height / width
+    const scale = Math.min(box.w * 0.96, (box.h * 0.92) / textAspect, 18);
+    particles.mat.uniforms.uScale.value = scale;
+    const cy = (r.top + r.height / 2 + window.scrollY) / window.innerHeight; // 0..1 from top of the page
+    particles.mat.uniforms.uLift.value = (0.5 - cy) * h;
+    particles.mat.uniforms.uSize.value = (isSmall() ? 22 : 30) * dpr();
   }
   fitParticles();
 
@@ -290,18 +326,68 @@ async function init3D() {
   gallery.visible = false;
   scene.add(gallery);
   const SPACING = 6;
-  const loader = new THREE.TextureLoader();
+  // holographic watermark: tiled "archived studio" mask with a gold-to-blue sheen sweeping across each card
+  const wmCanvas = await wmTilePromise;
+  const wmTex = new THREE.CanvasTexture(wmCanvas);
+  wmTex.wrapS = wmTex.wrapT = THREE.RepeatWrapping;
+  const maxAniso = renderer.capabilities.getMaxAnisotropy();
+  const cardVert = `varying vec2 vUv; void main(){ vUv = uv; gl_Position = projectionMatrix * modelViewMatrix * vec4(position,1.0); }`;
+  const cardFrag = `
+    uniform sampler2D uMap, uWm; uniform float uOpacity, uTime, uAspect, uHas; uniform vec3 uGold, uBlue;
+    varying vec2 vUv;
+    void main(){
+      vec4 base = uHas > 0.5 ? texture2D(uMap, vUv) : vec4(0.09,0.12,0.2,1.0);
+      vec2 wuv = vec2(vUv.x * uAspect, vUv.y) * 1.6;
+      float wm = texture2D(uWm, wuv).a;
+      float band = pow(max(0.0, sin((vUv.x * 1.3 + vUv.y) * 3.2 - uTime * 1.4)), 10.0);
+      vec3 holo = mix(uGold, uBlue, smoothstep(0.0, 1.0, vUv.y + 0.25 * sin(uTime * 0.6)));
+      vec3 col = base.rgb + wm * (0.07 + band * 0.45) * holo;
+      gl_FragColor = vec4(col, base.a * uOpacity);
+      #include <colorspace_fragment>
+    }`;
+  const SIG_FONT = '800 64px "Grenze Gotisch", serif';
+  function signedTexture(img) {
+    // bake a corner signature into the full-resolution image
+    const c = document.createElement('canvas');
+    c.width = img.naturalWidth; c.height = img.naturalHeight;
+    const x = c.getContext('2d');
+    x.drawImage(img, 0, 0);
+    const s = c.width / 1600;
+    x.font = SIG_FONT.replace('64px', `${Math.round(64 * Math.max(s, 0.45))}px`);
+    x.textAlign = 'right'; x.textBaseline = 'alphabetic';
+    x.shadowColor = 'rgba(0,0,0,.55)'; x.shadowBlur = 10 * s;
+    const g = x.createLinearGradient(c.width * 0.7, 0, c.width, 0);
+    g.addColorStop(0, '#ffffff'); g.addColorStop(0.5, '#FFC53D'); g.addColorStop(1, '#ffffff');
+    x.fillStyle = g; x.globalAlpha = 0.9;
+    x.fillText('archived', c.width - 26 * Math.max(s, .5), c.height - 22 * Math.max(s, .5));
+    const t = new THREE.CanvasTexture(c);
+    t.colorSpace = THREE.SRGBColorSpace;
+    t.anisotropy = maxAniso;
+    t.generateMipmaps = true;
+    t.minFilter = THREE.LinearMipmapLinearFilter;
+    return t;
+  }
   const cards = PIECES.map((p, i) => {
-    const mat = new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0, toneMapped: false, side: THREE.DoubleSide });
+    const mat = new THREE.ShaderMaterial({
+      transparent: true, side: THREE.DoubleSide, depthWrite: false,
+      uniforms: {
+        uMap: { value: null }, uWm: { value: wmTex }, uOpacity: { value: 0 }, uTime, uAspect: { value: 16 / 9 }, uHas: { value: 0 },
+        uGold: { value: new THREE.Color('#FFC53D') }, uBlue: { value: new THREE.Color('#7D95FF') },
+      },
+      vertexShader: cardVert, fragmentShader: cardFrag,
+    });
     const mesh = new THREE.Mesh(new THREE.PlaneGeometry(1, 1), mat);
     mesh.userData.i = i;
-    loader.load(p.src, (tex) => {
-      tex.colorSpace = THREE.SRGBColorSpace;
-      tex.anisotropy = 4;
-      mat.map = tex; mat.needsUpdate = true;
-      mesh.userData.aspect = tex.image.width / tex.image.height;
+    const img = new Image();
+    img.decoding = 'async';
+    img.onload = () => {
+      mat.uniforms.uMap.value = signedTexture(img);
+      mat.uniforms.uHas.value = 1;
+      mesh.userData.aspect = img.naturalWidth / img.naturalHeight;
+      mat.uniforms.uAspect.value = mesh.userData.aspect;
       layoutCards();
-    });
+    };
+    img.src = `${p.src}${isSmall() ? '-sm' : ''}.webp`;
     gallery.add(mesh);
     return mesh;
   });
@@ -327,7 +413,7 @@ async function init3D() {
 
   if (!reduced) {
     gsap.to(S, { intro: 0, duration: 2.4, ease: 'power3.inOut', delay: 0.2 });
-    gsap.from('.hero-copy > *', { y: 24, opacity: 0, duration: 1, ease: 'power3.out', stagger: 0.08, delay: 1.3 });
+    gsap.from(['.hero-top', '.hero-studio', '.hero-bottom > *'], { y: 20, opacity: 0, duration: 1, ease: 'power3.out', stagger: 0.07, delay: 1.2 });
 
     gsap.to(S, { scatter: 1, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
     gsap.to(S, { shape: 1, ease: 'none', scrollTrigger: { trigger: '.proof', start: 'top 90%', end: 'center center', scrub: true } });
@@ -392,9 +478,11 @@ async function init3D() {
 
     // chrome shape
     const sv = ease(S.shape) * (1 - ease(enter));
-    shape.scale.setScalar(Math.max(0.0001, sv * (isSmall() ? 0.8 : 1.15)));
-    shape.position.x = isSmall() ? 0 : 2.6;
-    shape.position.y = isSmall() ? 1.4 : 0.1;
+    const vis = visible(0);
+    const wide = window.innerWidth >= 960;
+    shape.scale.setScalar(Math.max(0.0001, sv * (wide ? vis.h * 0.16 : vis.h * 0.09)));
+    shape.position.x = wide ? vis.w * 0.25 : vis.w * 0.26;
+    shape.position.y = wide ? 0 : vis.h * 0.3;
     tilt.lerp(pointer, 0.05);
     shape.rotation.x = t * 0.18 + tilt.y * 0.4 + S.scatter * 1.2;
     shape.rotation.y = t * 0.24 + tilt.x * 0.6;
@@ -409,7 +497,7 @@ async function init3D() {
       const dz = camera.position.z - m.position.z;           // distance in front of camera
       const far = THREE.MathUtils.smoothstep(dz, 7, 16);      // 1 when far away, fades in from the fog
       const near = THREE.MathUtils.smoothstep(dz, 0.6, 2.2);  // 0 once it passes the camera
-      m.material.opacity = enter * (1 - far) * near;
+      m.material.uniforms.uOpacity.value = enter * (1 - far) * near;
     }
 
     renderer.render(scene, camera);

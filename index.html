@@ -4,14 +4,14 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Archived Studio | Game graphics and 3D websites</title>
-  <meta name="description" content="Thumbnails, icons and launch art for Roblox games with 80M+ visits, plus 3D websites. Archived Studio, Milwaukee.">
+  <meta name="description" content="Thumbnails, icons, posters and 3D websites for Roblox games with 80M+ visits. Archived Studio, Milwaukee.">
   <meta name="theme-color" content="#0C1322">
   <meta property="og:title" content="Archived Studio">
-  <meta property="og:description" content="Game thumbnails, icons and 3D websites for Roblox games and creators.">
-  <meta property="og:image" content="work/thumb-season5-toronto.webp">
+  <meta property="og:description" content="Game thumbnails, icons, posters and 3D websites for Roblox games and creators.">
+  <meta property="og:image" content="/work/thumb-season5-toronto.webp">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Grenze+Gotisch:wght@500..900&family=Plus+Jakarta+Sans:wght@300..700&family=Space+Mono&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Grenze+Gotisch:wght@500..900&family=Montserrat:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
   <script type="importmap">
   {
@@ -32,40 +32,50 @@
   <canvas id="stage" aria-hidden="true"></canvas>
 
   <header class="nav">
-    <a class="wordmark" href="#top" aria-label="Archived Studio, back to top">archived <span>studio</span></a>
-    <nav aria-label="Main">
-      <ul>
-        <li><a href="#work">Work</a></li>
-        <li><a href="#websites">Websites</a></li>
-        <li><a href="#services">Services</a></li>
-        <li><a class="nav-cta" href="#contact">Start a project</a></li>
-      </ul>
-    </nav>
+    <div class="nav-inner">
+      <a class="wordmark" href="#top" aria-label="Archived Studio, back to top">archived <span>studio</span></a>
+      <nav aria-label="Main">
+        <ul>
+          <li><a href="#work">work</a></li>
+          <li><a href="#websites">websites</a></li>
+          <li><a href="#services">rates</a></li>
+          <li><a class="nav-cta" href="#contact">start a project</a></li>
+        </ul>
+      </nav>
+    </div>
   </header>
 
   <main id="main">
+    <!-- HERO: the 3D particle word "archived" is the title; info frames it on all four sides -->
     <section id="top" class="hero">
-      <div class="hero-copy">
-        <p class="runner"><span>archived studio, milwaukee</span><span>game graphics &amp; 3d websites</span></p>
-        <h1>graphics for games people actually play.</h1>
-        <p>Archived Studio makes thumbnails, icons and launch art for Roblox games, plus the 3D websites to show them off. Based in Milwaukee, working with studios anywhere.</p>
+      <h1 class="sr-only">Archived Studio: game graphics and 3D websites</h1>
+      <div class="hero-top">
+        <p class="meta">game graphics &amp; 3d websites</p>
+        <p class="meta meta-right"><span class="dot" aria-hidden="true"></span>taking new projects</p>
+      </div>
+      <div class="hero-word" aria-hidden="true">
+        <span class="hero-fallback">archived</span>
+        <span class="hero-studio">studio</span>
+      </div>
+      <div class="hero-bottom">
+        <p class="hero-tag">graphics for games people actually play.</p>
+        <p class="hero-copy">Thumbnails, icons, posters and launch art for Roblox games, plus 3D websites to show them off. Based in Milwaukee, working with studios anywhere.</p>
         <div class="actions">
-          <a class="btn btn-solid" href="#work">See the work</a>
-          <a class="btn btn-line" href="#contact">Start a project</a>
+          <a class="btn btn-solid" href="#work">see the work</a>
+          <a class="btn btn-line" href="#contact">start a project</a>
         </div>
       </div>
-      <p class="scroll-hint" aria-hidden="true">Scroll</p>
     </section>
 
     <section class="proof" aria-labelledby="proof-title">
-      <h2 id="proof-title" class="sr-only">Track record</h2>
       <div class="proof-inner">
+        <h2 id="proof-title" class="proof-title">the track record</h2>
         <div class="stat">
           <p class="stat-num"><span data-count="80">80</span>M+</p>
           <p class="stat-label">visits across the Roblox games I've designed for, led by RH2: The Journey.</p>
         </div>
         <div class="stat">
-          <p class="stat-num"><span data-count="20">20</span>K+</p>
+          <p class="stat-num stat-num-alt"><span data-count="20">20</span>K+</p>
           <p class="stat-label">YouTube views on videos carrying my thumbnails and art.</p>
         </div>
         <p class="proof-note">Season launches, player features, event art and in-game icons, seen by players every day.</p>
@@ -81,8 +91,8 @@
 
     <section id="work" class="archive" aria-labelledby="work-title">
       <div class="wrap">
+        <p class="runner"><span>archived studio</span><span>01 / the archive</span></p>
         <header class="sec-head">
-          <p class="runner"><span>archived studio</span><span>01 / the archive</span></p>
           <h2 id="work-title">the archive</h2>
           <p>Work for RH2: The Journey and other Roblox projects. Select any piece to see it full size.</p>
         </header>
@@ -90,11 +100,11 @@
         <h3 class="group-title">game thumbnails</h3>
         <p class="group-note">16:9, built to win the click on the Roblox discover page and YouTube.</p>
         <ul class="grid grid-thumbs">
-          <li><button class="piece" data-full="work/thumb-season5-toronto.webp" data-title="Season 5 launch banner, RH2: The Journey"><img src="work/thumb-season5-toronto-sm.webp" alt="Season 5 launch banner with three RH2 players and the Toronto logo on yellow" width="768" height="432" loading="lazy"><span class="piece-cap"><b>Season 5 launch banner</b><span>RH2: The Journey</span></span></button></li>
-          <li><button class="piece" data-full="work/thumb-nathan-smith.webp" data-title="Nathan Smith player feature, RH2: The Journey"><img src="work/thumb-nathan-smith-sm.webp" alt="Nathan Smith holding a basketball over a distressed blue and black backdrop" width="768" height="432" loading="lazy"><span class="piece-cap"><b>Nathan Smith player feature</b><span>RH2: The Journey</span></span></button></li>
-          <li><button class="piece" data-full="work/thumb-get-into-the-spirit.webp" data-title="Get Into the Spirit, Halloween event"><img src="work/thumb-get-into-the-spirit-sm.webp" alt="Get Into the Spirit Halloween thumbnail with three costumed characters on orange" width="768" height="432" loading="lazy"><span class="piece-cap"><b>Get Into the Spirit</b><span>Halloween event</span></span></button></li>
-          <li><button class="piece" data-full="work/thumb-trick-or-treat.webp" data-title="Trick or Treat, Halloween event"><img src="work/thumb-trick-or-treat-sm.webp" alt="Trick or Treat thumbnail with three costumed characters on a couch by candlelight" width="768" height="432" loading="lazy"><span class="piece-cap"><b>Trick or Treat</b><span>Halloween event</span></span></button></li>
-          <li><button class="piece" data-full="work/thumb-season5-intro.webp" data-title="Season 5 player intro, RH2: The Journey"><img src="work/thumb-season5-intro-sm.webp" alt="Collage introducing a Toronto player for RH2 Season 5" width="768" height="432" loading="lazy"><span class="piece-cap"><b>Season 5 player intro</b><span>RH2: The Journey</span></span></button></li>
+          <li><button class="piece" data-full="work/thumb-season5-toronto.webp" data-title="Season 5 launch banner, RH2: The Journey"><span class="frame"><img src="work/thumb-season5-toronto.webp" srcset="work/thumb-season5-toronto-sm.webp 960w, work/thumb-season5-toronto.webp 1920w" sizes="(min-width: 1280px) 1200px, 100vw" alt="Season 5 launch banner with three RH2 players and the Toronto logo on yellow" width="1920" height="1080" loading="lazy" draggable="false"></span><span class="piece-cap"><b>Season 5 launch banner</b><span>RH2: The Journey</span></span></button></li>
+          <li><button class="piece" data-full="work/thumb-nathan-smith.webp" data-title="Nathan Smith player feature, RH2: The Journey"><span class="frame"><img src="work/thumb-nathan-smith-sm.webp" srcset="work/thumb-nathan-smith-sm.webp 960w, work/thumb-nathan-smith.webp 1920w" sizes="(min-width: 720px) 50vw, 100vw" alt="Nathan Smith holding a basketball over a distressed blue and black backdrop" width="1920" height="1080" loading="lazy" draggable="false"></span><span class="piece-cap"><b>Nathan Smith player feature</b><span>RH2: The Journey</span></span></button></li>
+          <li><button class="piece" data-full="work/thumb-get-into-the-spirit.webp" data-title="Get Into the Spirit, Halloween event"><span class="frame"><img src="work/thumb-get-into-the-spirit-sm.webp" srcset="work/thumb-get-into-the-spirit-sm.webp 960w, work/thumb-get-into-the-spirit.webp 1920w" sizes="(min-width: 720px) 50vw, 100vw" alt="Get Into the Spirit Halloween thumbnail with three costumed characters on orange" width="1920" height="1080" loading="lazy" draggable="false"></span><span class="piece-cap"><b>Get Into the Spirit</b><span>Halloween event</span></span></button></li>
+          <li><button class="piece" data-full="work/thumb-trick-or-treat.webp" data-title="Trick or Treat, Halloween event"><span class="frame"><img src="work/thumb-trick-or-treat-sm.webp" srcset="work/thumb-trick-or-treat-sm.webp 960w, work/thumb-trick-or-treat.webp 1920w" sizes="(min-width: 720px) 50vw, 100vw" alt="Trick or Treat thumbnail with three costumed characters on a couch by candlelight" width="1920" height="1080" loading="lazy" draggable="false"></span><span class="piece-cap"><b>Trick or Treat</b><span>Halloween event</span></span></button></li>
+          <li><button class="piece" data-full="work/thumb-season5-intro.webp" data-title="Season 5 player intro, RH2: The Journey"><span class="frame"><img src="work/thumb-season5-intro-sm.webp" srcset="work/thumb-season5-intro-sm.webp 960w, work/thumb-season5-intro.webp 1920w" sizes="(min-width: 720px) 50vw, 100vw" alt="Collage introducing a Toronto player for RH2 Season 5" width="1920" height="1080" loading="lazy" draggable="false"></span><span class="piece-cap"><b>Season 5 player intro</b><span>RH2: The Journey</span></span></button></li>
         </ul>
 
         <div class="split">
@@ -102,15 +112,15 @@
             <h3 class="group-title">game icons</h3>
             <p class="group-note">512 × 512, readable at the size of a thumbnail on a phone.</p>
             <ul class="grid grid-icons">
-              <li><button class="piece" data-full="work/icon-smith-point-guard.webp" data-title="Smith, point guard icon"><img src="work/icon-smith-point-guard-sm.webp" alt="Square icon of Nathan Smith dribbling, labelled point guard" width="512" height="512" loading="lazy"><span class="piece-cap"><b>Smith, point guard</b><span>Player icon</span></span></button></li>
-              <li><button class="piece" data-full="work/icon-happy-halloween.webp" data-title="Happy Halloween icon"><img src="work/icon-happy-halloween-sm.webp" alt="Square Halloween icon with a caped character in a dark city" width="512" height="512" loading="lazy"><span class="piece-cap"><b>Happy Halloween</b><span>Event icon</span></span></button></li>
+              <li><button class="piece" data-full="work/icon-smith-point-guard.webp" data-title="Smith, point guard icon"><span class="frame"><img src="work/icon-smith-point-guard.webp" alt="Square icon of Nathan Smith dribbling, labelled point guard" width="512" height="512" loading="lazy" draggable="false"></span><span class="piece-cap"><b>Smith, point guard</b><span>Player icon</span></span></button></li>
+              <li><button class="piece" data-full="work/icon-happy-halloween.webp" data-title="Happy Halloween icon"><span class="frame"><img src="work/icon-happy-halloween.webp" alt="Square Halloween icon with a caped character in a dark city" width="512" height="512" loading="lazy" draggable="false"></span><span class="piece-cap"><b>Happy Halloween</b><span>Event icon</span></span></button></li>
             </ul>
           </div>
           <div>
             <h3 class="group-title">posters</h3>
-            <p class="group-note">4:5, for socials and announcements.</p>
+            <p class="group-note">4:5, for socials, POTW, TOTW and announcements.</p>
             <ul class="grid grid-posters">
-              <li><button class="piece" data-full="work/poster-next-journey.webp" data-title="On to the next journey, Season 5 poster"><img src="work/poster-next-journey-sm.webp" alt="On to the Next Journey poster with four RH2 players under a large red headline" width="614" height="768" loading="lazy"><span class="piece-cap"><b>On to the next journey</b><span>Season 5 poster</span></span></button></li>
+              <li><button class="piece" data-full="work/poster-next-journey.webp" data-title="On to the next journey, Season 5 poster"><span class="frame"><img src="work/poster-next-journey-sm.webp" srcset="work/poster-next-journey-sm.webp 768w, work/poster-next-journey.webp 1080w" sizes="(min-width: 900px) 420px, 100vw" alt="On to the Next Journey poster with four RH2 players under a large red headline" width="1080" height="1350" loading="lazy" draggable="false"></span><span class="piece-cap"><b>On to the next journey</b><span>Season 5 poster</span></span></button></li>
             </ul>
           </div>
         </div>
@@ -119,28 +129,29 @@
 
     <section id="websites" class="sites" aria-labelledby="sites-title">
       <div class="wrap">
-        <header class="sec-head">
-          <p class="runner"><span>archived studio</span><span>02 / websites</span></p>
+        <p class="runner"><span>archived studio</span><span>02 / websites</span></p>
+        <header class="sec-head sec-head-split">
           <h2 id="sites-title">websites</h2>
           <p>Sites built by the studio. Every new launch gets added here.</p>
         </header>
         <ul class="site-list">
           <li class="site">
             <div class="site-frame" aria-hidden="true">
-              <div class="site-bar"><i></i><i></i><i></i></div>
+              <div class="site-bar"><i></i><i></i><i></i><span>archived-studio.vercel.app</span></div>
               <div class="site-mock"><span>archived</span></div>
             </div>
             <div class="site-body">
-              <h3>Archived Studio</h3>
-              <p>This site. A particle intro, a chrome centerpiece that reacts to your cursor, and a scroll-driven flight through the archive.</p>
+              <h3>archived studio</h3>
+              <p>This site. A particle intro, a chrome centerpiece that follows your cursor, and a scroll-driven flight through the archive.</p>
               <p class="site-tech">Three.js, GSAP, Lenis, Vercel</p>
               <a class="text-link" href="#top">You're on it</a>
             </div>
           </li>
           <li class="site site-open">
             <div class="site-body">
-              <h3>Your game's site could go here</h3>
-              <p>Launch pages, update logs, creator portfolios. Built in 3D, deployed and handed over ready to share.</p>
+              <p class="site-price"><b>$70</b> + $25 / month</p>
+              <h3>your game's site could go here</h3>
+              <p>Launch pages, update logs, creator portfolios. Built in 3D, deployed and kept running for you.</p>
               <a class="text-link" href="#contact">Start a website</a>
             </div>
           </li>
@@ -151,36 +162,40 @@
     <section id="services" class="services" aria-labelledby="services-title">
       <div class="wrap">
         <p class="runner"><span>archived studio</span><span>03 / rates</span></p>
-        <div class="rates">
-          <div class="rates-intro">
-            <h2 id="services-title">the rate card</h2>
+        <header class="rates-head">
+          <h2 id="services-title">the rate card</h2>
+          <div class="rates-lede">
             <p>Flat prices for every kind of piece. Bundle a thumbnail and icon together to save.</p>
-            <ol class="steps">
-              <li><b>tell me about the project</b><span>Send the reply card below, a DM or an email. What the game is, what you need, when it drops.</span></li>
-              <li><b>i design it</b><span>I build the piece around your game, event or brand and check in with you along the way.</span></li>
-              <li><b>you get the files</b><span>Final graphics delivered ready to post, or your website live with a link to share.</span></li>
-            </ol>
+            <p class="rates-callout"><b>$25</b> thumbnail + icon package</p>
           </div>
-          <div class="card">
-            <div class="card-bar"><span>rate card</span><span>effective 2026</span></div>
-            <dl class="rate-list">
-              <div class="rate rate-feature"><dt>thumbnail + icon package<small>One game thumbnail and one matching icon</small></dt><dd><b>$25</b><small>per package</small></dd></div>
-              <div class="rate"><dt>thumbnail or icon<small>Either one on its own</small></dt><dd><b>$15</b><small>each</small></dd></div>
-              <div class="rate"><dt>graphic designs<small>Roblox posters, POTW, TOTW and announcements</small></dt><dd><b>$20</b><small>per design</small></dd></div>
-              <div class="rate"><dt>flyers<small>Parties, events and promos</small></dt><dd><b>$10</b><small>per flyer</small></dd></div>
-              <div class="rate"><dt>3d website<small>Built and launched, then $25 a month covers hosting, upkeep and updates</small></dt><dd><b>$70</b><small>+ $25 / month</small></dd></div>
-              <div class="rate"><dt>clothing designs<small>A bundle of designs for your drop</small></dt><dd><b>$40</b><small>per bundle</small></dd></div>
-              <div class="rate"><dt>logos<small>A bundle of logo options to choose from</small></dt><dd><b>$15</b><small>per bundle</small></dd></div>
-            </dl>
-            <div class="card-foot"><span>all prices in usd.</span><a class="btn btn-solid" href="#contact">get a quote</a></div>
-          </div>
+        </header>
+        <ol class="steps">
+          <li><span class="step-n" aria-hidden="true">1</span><b>tell me about the project</b><span>Send the reply card below, a DM or an email. What the game is, what you need, when it drops.</span></li>
+          <li><span class="step-n" aria-hidden="true">2</span><b>i design it</b><span>I build the piece around your game, event or brand and check in with you along the way.</span></li>
+          <li><span class="step-n" aria-hidden="true">3</span><b>you get the files</b><span>Final graphics delivered ready to post, or your website live with a link to share.</span></li>
+        </ol>
+        <div class="card">
+          <div class="card-bar"><span>rate card</span><span>effective 2026, prices in usd</span></div>
+          <dl class="rate-list">
+            <div class="rate rate-feature"><dt>thumbnail + icon package<small>One game thumbnail and one matching icon</small></dt><dd><b>$25</b><small>per package</small></dd></div>
+            <div class="rate"><dt>thumbnail or icon<small>Either one on its own</small></dt><dd><b>$15</b><small>each</small></dd></div>
+            <div class="rate"><dt>graphic designs<small>Roblox posters, POTW, TOTW and announcements</small></dt><dd><b>$20</b><small>per design</small></dd></div>
+            <div class="rate"><dt>flyers<small>Parties, events and promos</small></dt><dd><b>$10</b><small>per flyer</small></dd></div>
+            <div class="rate"><dt>logos<small>A bundle of logo options to choose from</small></dt><dd><b>$15</b><small>per bundle</small></dd></div>
+            <div class="rate"><dt>clothing designs<small>A bundle of designs for your drop</small></dt><dd><b>$40</b><small>per bundle</small></dd></div>
+            <div class="rate"><dt>3d website<small>Built and launched, then hosting, upkeep and updates monthly</small></dt><dd><b>$70</b><small>+ $25 / month</small></dd></div>
+          </dl>
+          <div class="card-foot"><span>Not sure what you need? Ask and I'll quote it.</span><a class="btn btn-solid" href="#contact">get a quote</a></div>
         </div>
       </div>
     </section>
 
     <section class="about" aria-labelledby="about-title">
       <div class="wrap about-inner">
-        <div><p class="runner runner-solo">04 / origin</p><h2 id="about-title">about the studio</h2></div>
+        <div>
+          <p class="runner runner-solo">04 / origin</p>
+          <h2 id="about-title">about the studio</h2>
+        </div>
         <div>
           <p>Archived Studio started on RH2: The Journey, making the player cards, season banners and event art that thousands of players see every day.</p>
           <p>Now it takes on posters, flyers, clothing, logos and websites for studios, creators and events who want work that stands out. Every project gets the same energy.</p>
@@ -193,11 +208,17 @@
       <div class="wrap">
         <p class="runner"><span>archived studio</span><span>05 / reply card</span></p>
         <h2 id="contact-title">let's build something.</h2>
-        <p class="contact-lede">Need a thumbnail, an icon set or a site for your game? Fill this in and I'll reply by email within a day.</p>
+        <p class="contact-lede">Need a thumbnail, an icon set or a site for your game? Fill in the card and I'll reply by email within a day.</p>
         <div class="contact-grid">
           <form class="reply" id="reply" novalidate>
             <div class="reply-bar"><span>reply card</span><span>no stamp needed</span></div>
             <div class="reply-body">
+              <div class="stamp" aria-hidden="true">
+                <span class="stamp-a">a</span>
+                <span class="stamp-txt">milwaukee</span>
+              </div>
+              <div class="postmark" aria-hidden="true"><span>archived studio</span></div>
+              <p class="reply-to">To: <b>archived studio</b><span>Milwaukee, WI</span></p>
               <div class="field-row">
                 <div class="field"><label for="f-name">your name</label><input id="f-name" name="name" type="text" autocomplete="name" required></div>
                 <div class="field"><label for="f-email">your email</label><input id="f-email" name="email" type="email" autocomplete="email" required></div>
@@ -206,7 +227,7 @@
                 <select id="f-topic" name="topic" required>
                   <option value="">Pick one</option>
                   <option>Thumbnail + icon package</option><option>Thumbnail or icon</option><option>Graphic design (poster, POTW, TOTW)</option>
-                  <option>Flyer</option><option>3D website</option><option>Clothing designs</option><option>Logos</option><option>Something else</option>
+                  <option>Flyer</option><option>Logos</option><option>Clothing designs</option><option>3D website</option><option>Something else</option>
                 </select>
               </div>
               <div class="field"><label for="f-msg">message</label><textarea id="f-msg" name="message" rows="5" required placeholder="The game, what you need and when it drops."></textarea></div>
@@ -219,12 +240,11 @@
           </form>
           <div class="direct">
             <p class="direct-title">or reach me directly</p>
-            <!-- TODO: business email still pending -->
             <dl>
               <div><dt>email</dt><dd><a id="direct-email" href="mailto:hello@archived.studio">hello@archived.studio</a></dd></div>
               <div><dt>discord</dt><dd>japanesefriends</dd></div>
-              <div><dt>instagram</dt><dd><a href="https://www.instagram.com/noticdyaa/" rel="noopener" target="_blank">@noticdyaa</a></dd></div>
-              <div><dt>based in</dt><dd>Milwaukee, WI</dd></div>
+              <div><dt>instagram</dt><dd><a href="https://www.instagram.com/noticedyaa/" rel="noopener" target="_blank">@noticedyaa</a></dd></div>
+              <div><dt>based in</dt><dd>milwaukee, wi</dd></div>
               <div><dt>status</dt><dd class="status"><span class="dot" aria-hidden="true"></span>taking new projects</dd></div>
             </dl>
           </div>
@@ -234,13 +254,66 @@
   </main>
 
   <footer class="foot">
-    <p class="wordmark">archived <span>studio</span></p>
-    <p>© <span id="yr">2026</span> archived studio, milwaukee</p>
+    <div class="wrap">
+      <div class="foot-top">
+        <div class="foot-brand">
+          <p class="wordmark foot-mark">archived <span>studio</span></p>
+          <p>Game graphics and 3D websites, Milwaukee, WI.</p>
+        </div>
+        <nav class="foot-col" aria-label="Footer">
+          <p class="foot-h">site</p>
+          <ul>
+            <li><a href="#work">the archive</a></li>
+            <li><a href="#websites">websites</a></li>
+            <li><a href="#services">rate card</a></li>
+            <li><a href="#contact">reply card</a></li>
+          </ul>
+        </nav>
+        <div class="foot-col">
+          <p class="foot-h">contact</p>
+          <ul>
+            <li><a class="foot-email" href="mailto:hello@archived.studio">hello@archived.studio</a></li>
+            <li>discord: japanesefriends</li>
+            <li><a href="https://www.instagram.com/noticedyaa/" rel="noopener" target="_blank">instagram: @noticedyaa</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <section class="policies" aria-labelledby="policies-title">
+        <h2 id="policies-title" class="foot-h">policies</h2>
+        <!-- DRAFT policies: confirm with the studio owner -->
+        <details>
+          <summary>payment</summary>
+          <p>Prices are in US dollars. Graphics are paid in full before final, unwatermarked files are delivered. Websites are $70 for the build, paid at launch, then $25 a month for hosting, upkeep and updates.</p>
+        </details>
+        <details>
+          <summary>revisions</summary>
+          <p>Every piece includes two rounds of revisions. Extra rounds or big changes in direction after the design is approved may be quoted separately.</p>
+        </details>
+        <details>
+          <summary>refunds &amp; cancellations</summary>
+          <p>Because every piece is made to order, payments are non-refundable once work has started. The website plan can be cancelled anytime; it stops at the end of the month already paid.</p>
+        </details>
+        <details>
+          <summary>usage &amp; credit</summary>
+          <p>Once paid, you can use the final work for your game, socials and promotion. Archived Studio may show finished work in this portfolio unless you ask to keep it private. Previews are watermarked until payment.</p>
+        </details>
+        <details>
+          <summary>privacy</summary>
+          <p>Messages sent through the reply card go to the studio's email through FormSubmit and are only used to reply to you. This site doesn't use tracking cookies or ads, and your details are never sold or shared.</p>
+        </details>
+      </section>
+
+      <div class="foot-bottom">
+        <p>© <span id="yr">2026</span> archived studio. All artwork shown belongs to its respective games and clients.</p>
+        <a href="#top">back to top</a>
+      </div>
+    </div>
   </footer>
 
   <dialog id="lightbox" aria-labelledby="lb-title">
-    <form method="dialog"><button class="lb-close" aria-label="Close">Close</button></form>
-    <img id="lb-img" alt="">
+    <form method="dialog"><button class="lb-close" aria-label="Close">close</button></form>
+    <div class="lb-frame frame"><img id="lb-img" alt="" draggable="false"></div>
     <p id="lb-title"></p>
   </dialog>
 </body>
