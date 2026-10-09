@@ -502,7 +502,10 @@ async function init3D() {
     const sv = ease(S.shape) * (1 - ease(Math.min(1, f * 14)));
     const vis = visible(0);
     const wide = window.innerWidth >= 960;
-    shape.scale.setScalar(Math.max(0.0001, sv * (wide ? Math.min(vis.h * 0.13, vis.w * 0.075) : vis.h * 0.08)));
+    // phones: no room beside the stats, so the shape sits out
+    const phone = window.innerWidth < 720;
+    shape.visible = !phone;
+    shape.scale.setScalar(Math.max(0.0001, sv * (wide ? Math.min(vis.h * 0.13, vis.w * 0.075) : vis.h * 0.1)));
     shape.position.x = wide ? vis.w * 0.27 : vis.w * 0.26;
     shape.position.y = wide ? 0 : vis.h * 0.3;
     tilt.lerp(pointer, 0.05);

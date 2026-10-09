@@ -94,7 +94,14 @@ main, .nav, .foot { position: relative; z-index: 1; }
 .nav a:not(.wordmark):hover { background: rgba(232,235,241,.08); }
 .nav .nav-cta { background: var(--court); color: var(--ink); }
 .nav .nav-cta:hover { background: #FFD46E !important; }
-@media (max-width: 680px) { .nav li:not(:last-child) { display: none; } .nav-inner { padding-left: 16px; } }
+@media (max-width: 680px) {
+  .nav { padding-top: 10px; }
+  .nav li:not(:last-child) { display: none; }
+  .nav-inner { padding-left: 16px; height: 52px; }
+  .wordmark { font-size: 1.4rem; }
+  .nav .nav-cta { padding: 0 14px; font-size: .82rem; min-height: 38px; }
+}
+.wordmark, .nav-cta { white-space: nowrap; }
 
 /* ---------- Buttons ---------- */
 .actions { display: flex; flex-wrap: wrap; gap: 12px; }
