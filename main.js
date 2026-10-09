@@ -195,8 +195,9 @@ try {
   canvas.remove();
 }
 
-if (renderer) init3D();
+if (renderer) init3D().catch((e) => { window.__as.fail = String(e && (e.stack || e.message)).slice(0, 800); });
 
+window.__as = { step: 'start' };
 async function init3D() {
   const isSmall = () => window.innerWidth < 720;
   const dpr = () => Math.min(window.devicePixelRatio, isSmall() ? 1.5 : 2);
@@ -228,7 +229,9 @@ async function init3D() {
 
   /* ---------- 1. Particle wordmark ---------- */
   try { await document.fonts.load('900 200px "Grenze Gotisch"'); } catch (e) {}
+  window.__as.step = 'fonts-ok';
   const particles = buildParticles();
+  window.__as.step = 'particles';
   scene.add(particles.points);
 
   function buildParticles() {
@@ -351,7 +354,9 @@ async function init3D() {
   scene.add(gallery);
   const SPACING = 6;
   // holographic watermark: tiled "archived studio" mask with a gold-to-blue sheen sweeping across each card
+  window.__as.step = 'await-wm';
   const wmCanvas = await wmTilePromise;
+  window.__as.step = 'wm-ok';
   const wmTex = new THREE.CanvasTexture(wmCanvas);
   wmTex.wrapS = wmTex.wrapT = THREE.RepeatWrapping;
   const maxAniso = renderer.capabilities.getMaxAnisotropy();
@@ -487,6 +492,10 @@ async function init3D() {
   const ease = (x) => x * x * (3 - 2 * x);
 
   function frame() {
+    window.__as.frames = (window.__as.frames || 0) + 1;
+    try { frameBody(); } catch (e) { window.__as.err = String(e && (e.stack || e.message)).slice(0, 800); }
+  }
+  function frameBody() {
     if (document.hidden || covered()) return;
     const t = clock.getElapsedTime();
     uTime.value = reduced ? 0 : t;
@@ -525,5 +534,6 @@ async function init3D() {
     renderer.render(scene, camera);
   }
   gsap.ticker.add(frame);
+  window.__as.step = 'loop';
   if (reduced) { S.intro = 0; S.shape = 1; }
 }
