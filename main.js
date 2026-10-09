@@ -107,13 +107,30 @@ const direct = document.getElementById('direct-email');
 direct.href = `mailto:${CONTACT_EMAIL}`;
 direct.textContent = CONTACT_EMAIL;
 document.querySelectorAll('.foot-email').forEach((a) => { a.href = `mailto:${CONTACT_EMAIL}`; a.textContent = CONTACT_EMAIL; });
+const fEmail = document.getElementById('f-email');
+const fPhone = document.getElementById('f-phone');
+function syncReach() {
+  const phone = form.reach.value === 'phone';
+  document.getElementById('field-phone').hidden = !phone;
+  document.getElementById('field-email').hidden = phone;
+  fPhone.required = phone;
+  fEmail.required = !phone;
+  fPhone.setCustomValidity('');
+}
+form.querySelectorAll('input[name="reach"]').forEach((r) => r.addEventListener('change', syncReach));
+syncReach();
+
 form.addEventListener('submit', async (e) => {
   e.preventDefault();
+  const digits = fPhone.value.replace(/\D/g, '');
+  fPhone.setCustomValidity(fPhone.required && (digits.length < 10 || digits.length > 15) ? 'Enter a full phone number with area code.' : '');
   const fields = [...form.querySelectorAll('input[required], select[required], textarea[required]')];
   const bad = fields.find((f) => !f.checkValidity());
   fields.forEach((f) => f.setAttribute('aria-invalid', String(!f.checkValidity())));
   if (bad) {
-    statusEl.textContent = bad.type === 'email' && bad.value ? 'Check your email address, it looks incomplete.' : 'Fill in every field so I can reply.';
+    statusEl.textContent = bad.type === 'email' && bad.value ? 'Check your email address, it looks incomplete.'
+      : bad.type === 'tel' && bad.value ? 'Enter a full phone number with area code.'
+      : 'Fill in every field so I can reply.';
     statusEl.dataset.state = 'error';
     bad.focus();
     return;
@@ -121,6 +138,9 @@ form.addEventListener('submit', async (e) => {
   if (form._honey.value) return; // bots fill hidden fields
   const data = Object.fromEntries(new FormData(form));
   delete data._honey;
+  const byPhone = data.reach === 'phone';
+  if (byPhone) delete data.email; else delete data.phone;
+  data.reach = byPhone ? 'Phone / text' : 'Email';
   sendBtn.disabled = true;
   sendBtn.textContent = 'sending…';
   statusEl.textContent = '';
@@ -130,12 +150,14 @@ form.addEventListener('submit', async (e) => {
       headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
       body: JSON.stringify({
         ...data,
-        _subject: `New ${data.topic} request from ${data.name}`,
+        _subject: `New ${data.topic} request from ${data.name} (reply by ${byPhone ? 'text' : 'email'})`,
         _template: 'table',
-        _replyto: data.email,
         _captcha: 'false',
-        // automatic confirmation email sent to the client
-        _autoresponse: `Hey ${data.name}, thanks for reaching out to Archived Studio! Your ${data.topic.toLowerCase()} request came through and I'll reply within a day with a quote and next steps. You can check the rate card anytime at ${SITE_URL}/#services. Talk soon, Archived Studio`,
+        // automatic confirmation email to the client (only possible when they gave an email)
+        ...(byPhone ? {} : {
+          _replyto: data.email,
+          _autoresponse: `Hey ${data.name}, thanks for reaching out to Archived Studio! Your ${data.topic.toLowerCase()} request came through and I'll reply within a day with a quote and next steps. You can check the rate card anytime at ${SITE_URL}/#services. Talk soon, Archived Studio`,
+        }),
       }),
     });
     const out = await res.json().catch(() => ({}));
@@ -161,9 +183,12 @@ function showSent(data) {
   done.setAttribute('tabindex', '-1');
   const h = document.createElement('p'); h.className = 'done-title'; h.textContent = 'message sent.';
   const p1 = document.createElement('p'); p1.textContent = `Thanks, ${data.name}. Your ${data.topic.toLowerCase()} request is in.`;
-  const p2 = document.createElement('p'); p2.textContent = `A confirmation is on its way to ${data.email}, and I'll reply with a quote and next steps within a day.`;
+  const p2 = document.createElement('p');
+  p2.textContent = data.phone
+    ? `I'll text you at ${data.phone} with a quote and next steps within a day.`
+    : `A confirmation is on its way to ${data.email}, and I'll reply with a quote and next steps within a day.`;
   const again = document.createElement('button'); again.type = 'button'; again.className = 'btn btn-line'; again.textContent = 'send another message';
-  again.addEventListener('click', () => { done.remove(); body.hidden = false; statusEl.textContent = ''; form.querySelector('#f-name').focus(); });
+  again.addEventListener('click', () => { done.remove(); body.hidden = false; statusEl.textContent = ''; syncReach(); form.querySelector('#f-name').focus(); });
   done.append(h, p1, p2, again);
   body.hidden = true;
   body.after(done);
@@ -247,7 +272,7 @@ async function init3D() {
     ctx.fillText('archived', W / 2, H / 2);
     const data = ctx.getImageData(0, 0, W, H).data;
 
-    const target = isSmall() ? 3800 : 8000;
+    const target = isSmall() ? 5000 : 15000;
     const pts = [];
     for (let y = 0; y < H; y += 2) for (let x = 0; x < W; x += 2) if (data[(y * W + x) * 4 + 3] > 128) pts.push(x, y);
     const total = pts.length / 2;
@@ -320,11 +345,11 @@ async function init3D() {
     const r = heroWord.getBoundingClientRect();
     const box = { w: (r.width / window.innerWidth) * w, h: (r.height / window.innerHeight) * h };
     const textAspect = 340 / 1400;                       // canvas height / width
-    const scale = Math.min(box.w * 0.96, (box.h * 0.92) / textAspect, 18);
+    const scale = Math.min(box.w * 1.0, (box.h * 0.95) / textAspect, 30);
     particles.mat.uniforms.uScale.value = scale;
     const cy = (r.top + r.height / 2 + window.scrollY) / window.innerHeight; // 0..1 from top of the page
     particles.mat.uniforms.uLift.value = (0.5 - cy) * h;
-    particles.mat.uniforms.uSize.value = (isSmall() ? 22 : 30) * dpr();
+    particles.mat.uniforms.uSize.value = (isSmall() ? 24 : 34) * dpr();
   }
   fitParticles();
 
@@ -437,7 +462,7 @@ async function init3D() {
 
   if (!reduced) {
     gsap.to(S, { intro: 0, duration: 2.4, ease: 'power3.inOut', delay: 0.2 });
-    gsap.from(['.hero-top', '.hero-studio', '.hero-bottom > *'], { y: 20, opacity: 0, duration: 1, ease: 'power3.out', stagger: 0.07, delay: 1.2 });
+    gsap.from(['.hero-top', '.hero-studio', '.scroll-cue'], { y: 20, opacity: 0, duration: 1, ease: 'power3.out', stagger: 0.07, delay: 1.2 });
 
     gsap.to(S, { scatter: 1, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
     gsap.to(S, { shape: 1, ease: 'none', scrollTrigger: { trigger: '.proof', start: 'top 90%', end: 'center center', scrub: true } });

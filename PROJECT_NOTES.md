@@ -13,7 +13,7 @@ Portfolio for Archived Studio (formerly VANTA): game graphics for Roblox games (
 ## Design system
 - Colors: ink `#0C1322`, ink-2 `#16203A`, paper `#E8EBF1`, court yellow `#FFC53D`, volt blue `#3D5CFF`, slate `#8B94A7`.
 - Type: Grenze Gotisch (blackletter, lowercase) for headings/wordmark, the user's stand-in for Duc De Berry. Montserrat for ALL information text, labels, prices and stats (user wants Gotham family; Gotham has no free web license, Montserrat is the stand-in, 900 = Gotham Black). Anton/Plus Jakarta/Space Mono removed.
-- Hero: particle word 'archived' fills the middle `.hero-word` box (sized from its DOM rect), info frames it top and bottom. Header is a floating pill bar that hides on scroll down.
+- Hero: full-screen, the particle word 'archived' fills the `.hero-word` box (user wants it BIG). Tagline, intro copy and buttons live in the `.intro` section right under the hero, before the stats/chrome shape. Header is a floating pill bar that hides on scroll down.
 - Stats: left 52%, chrome torus knot fills the right half.
 - Flight: full-res images baked with a corner 'archived' signature + shader holographic tiled watermark with a sweeping gold/blue sheen.
 - Grid/lightbox images: `.frame` overlay with tiled watermark (canvas-generated `--wm`) + animated corner signature. Right-click disabled on images.
@@ -23,13 +23,13 @@ Portfolio for Archived Studio (formerly VANTA): game graphics for Roblox games (
 - Reduced motion: no Lenis, no flight section, static scene. No WebGL: `.no-webgl` gradient fallback.
 
 ## Content
-- Prices (USD): thumbnail + icon package $25, thumbnail or icon alone $15 each, graphic designs (posters, POTW, TOTW) $20, flyers $10, website $70 + $25/month (hosting, upkeep, updates), clothing design bundle $40, logo bundle $15. No social/video service (user removed it).
+- Prices (USD): thumbnail + icon package $25, thumbnail or icon alone $15 each, graphic designs (posters, POTW, TOTW) $20, flyers $10, standard website $50 + $25/month, 3D website $70 + $25/month (upkeep is $25/month for either: hosting, updates, fixes), clothing design bundle $40, logo bundle $15. No social/video service (user removed it).
 - Stats: 80M+ Roblox visits across games designed for, 20K+ YouTube views.
 - Work sorted by size: 16:9 = Game thumbnails, 512x512 = Game icons, 4:5 = Posters. Files in `/work`, each with a full and a `-sm` version (webp).
 - Websites section: add each new site as an `<li class="site">` in `#websites`.
 
 ## Open items
-- Contact: business email archivedstudio.mke@gmail.com. Reply card posts to FormSubmit ajax (`CONTACT_EMAIL` in main.js) with `_autoresponse` (automatic confirmation email to the client) and shows an on-site 'message sent.' panel. First real submission sends a one-time FormSubmit activation email that must be clicked. Notifications arrive from FormSubmit (submissions@formsubmit.co).
+- Contact: business email archivedstudio.mke@gmail.com. Reply card posts to FormSubmit ajax (`CONTACT_EMAIL` in main.js) with `_autoresponse` (automatic confirmation email to the client) and shows an on-site 'message sent.' panel. Clients pick email or phone/text; autoresponse only goes out when they chose email. First real submission sends a one-time FormSubmit activation email that must be clicked. Notifications arrive from FormSubmit (submissions@formsubmit.co).
 - Discord: japanesefriends. Instagram: @noticedyaa.
 - Websites entry for this site has a drawn mock; swap in a real screenshot later.
 - Live: https://archived-studio.vercel.app (Vercel project archived-studio, auto-deploys from GitHub main).

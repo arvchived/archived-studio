@@ -57,12 +57,18 @@
         <span class="hero-fallback">archived</span>
         <span class="hero-studio">studio</span>
       </div>
-      <div class="hero-bottom">
-        <p class="hero-tag">graphics for games people actually play.</p>
-        <p class="hero-copy">Thumbnails, icons, posters and launch art for Roblox games, plus 3D websites to show them off. Based in Milwaukee, working with studios anywhere.</p>
-        <div class="actions">
-          <a class="btn btn-solid" href="#work">see the work</a>
-          <a class="btn btn-line" href="#contact">start a project</a>
+      <p class="scroll-cue" aria-hidden="true">scroll</p>
+    </section>
+
+    <section class="intro" aria-labelledby="intro-title">
+      <div class="intro-inner">
+        <h2 id="intro-title" class="intro-tag">graphics for games people actually play.</h2>
+        <div class="intro-side">
+          <p class="intro-copy">Thumbnails, icons, posters and launch art for Roblox games, plus websites to show them off. Based in Milwaukee, working with studios anywhere.</p>
+          <div class="actions">
+            <a class="btn btn-solid" href="#work">see the work</a>
+            <a class="btn btn-line" href="#contact">start a project</a>
+          </div>
         </div>
       </div>
     </section>
@@ -149,9 +155,9 @@
           </li>
           <li class="site site-open">
             <div class="site-body">
-              <p class="site-price"><b>$70</b> + $25 / month</p>
+              <p class="site-price">from <b>$50</b> + $25 / month</p>
               <h3>your game's site could go here</h3>
-              <p>Launch pages, update logs, creator portfolios. Built in 3D, deployed and kept running for you.</p>
+              <p>Launch pages, update logs, creator portfolios. Standard or 3D, deployed and kept running for you.</p>
               <a class="text-link" href="#contact">Start a website</a>
             </div>
           </li>
@@ -183,7 +189,9 @@
             <div class="rate"><dt>flyers<small>Parties, events and promos</small></dt><dd><b>$10</b><small>per flyer</small></dd></div>
             <div class="rate"><dt>logos<small>A bundle of logo options to choose from</small></dt><dd><b>$15</b><small>per bundle</small></dd></div>
             <div class="rate"><dt>clothing designs<small>A bundle of designs for your drop</small></dt><dd><b>$40</b><small>per bundle</small></dd></div>
-            <div class="rate"><dt>3d website<small>Built and launched, then hosting, upkeep and updates monthly</small></dt><dd><b>$70</b><small>+ $25 / month</small></dd></div>
+            <div class="rate"><dt>website<small>A clean, fast site, built and launched</small></dt><dd><b>$50</b><small>+ $25 / month</small></dd></div>
+            <div class="rate"><dt>3d website<small>Scroll animation and 3D effects, built and launched</small></dt><dd><b>$70</b><small>+ $25 / month</small></dd></div>
+            <div class="rate rate-note"><dt>website upkeep<small>Hosting, updates and fixes for either website, every month</small></dt><dd><b>$25</b><small>per month</small></dd></div>
           </dl>
           <div class="card-foot"><span>Not sure what you need? Ask and I'll quote it.</span><a class="btn btn-solid" href="#contact">get a quote</a></div>
         </div>
@@ -219,15 +227,21 @@
               </div>
               <div class="postmark" aria-hidden="true"><span>archived studio</span></div>
               <p class="reply-to">To: <b>archived studio</b><span>Milwaukee, WI</span></p>
-              <div class="field-row">
-                <div class="field"><label for="f-name">your name</label><input id="f-name" name="name" type="text" autocomplete="name" required></div>
-                <div class="field"><label for="f-email">your email</label><input id="f-email" name="email" type="email" autocomplete="email" required></div>
-              </div>
+              <div class="field"><label for="f-name">your name</label><input id="f-name" name="name" type="text" autocomplete="name" required></div>
+              <fieldset class="reach">
+                <legend>how should I reach you?</legend>
+                <div class="reach-opts">
+                  <label class="reach-opt"><input type="radio" name="reach" value="email" checked><span>email</span></label>
+                  <label class="reach-opt"><input type="radio" name="reach" value="phone"><span>phone / text</span></label>
+                </div>
+              </fieldset>
+              <div class="field" id="field-email"><label for="f-email">your email</label><input id="f-email" name="email" type="email" autocomplete="email" required></div>
+              <div class="field" id="field-phone" hidden><label for="f-phone">your phone number</label><input id="f-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" placeholder="(414) 555-0123"></div>
               <div class="field"><label for="f-topic">what do you need?</label>
                 <select id="f-topic" name="topic" required>
                   <option value="">Pick one</option>
                   <option>Thumbnail + icon package</option><option>Thumbnail or icon</option><option>Graphic design (poster, POTW, TOTW)</option>
-                  <option>Flyer</option><option>Logos</option><option>Clothing designs</option><option>3D website</option><option>Something else</option>
+                  <option>Flyer</option><option>Logos</option><option>Clothing designs</option><option>Website</option><option>3D website</option><option>Something else</option>
                 </select>
               </div>
               <div class="field"><label for="f-msg">message</label><textarea id="f-msg" name="message" rows="5" required placeholder="The game, what you need and when it drops."></textarea></div>
@@ -284,7 +298,7 @@
         <!-- DRAFT policies: confirm with the studio owner -->
         <details>
           <summary>payment</summary>
-          <p>Prices are in US dollars. Graphics are paid in full before final, unwatermarked files are delivered. Websites are $70 for the build, paid at launch, then $25 a month for hosting, upkeep and updates.</p>
+          <p>Prices are in US dollars. Graphics are paid in full before final, unwatermarked files are delivered. Websites are $50 (standard) or $70 (3D) for the build, paid at launch, then $25 a month for hosting, upkeep and updates.</p>
         </details>
         <details>
           <summary>revisions</summary>
