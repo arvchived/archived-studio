@@ -9,7 +9,8 @@ gsap.registerPlugin(ScrollTrigger);
 /* ---------- Contact settings ----------
    Messages from the reply card are delivered by FormSubmit (formsubmit.co) to this address.
    The first message sent triggers a one-time confirmation email to this inbox; click it once. */
-const CONTACT_EMAIL = 'hello@archived.studio'; // TODO: the studio's real email
+const CONTACT_EMAIL = 'archivedstudio.mke@gmail.com';
+const SITE_URL = 'https://archived-studio.vercel.app';
 
 const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const root = document.documentElement;
@@ -127,13 +128,20 @@ form.addEventListener('submit', async (e) => {
     const res = await fetch(`https://formsubmit.co/ajax/${CONTACT_EMAIL}`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-      body: JSON.stringify({ ...data, _subject: `New ${data.topic} request from ${data.name}`, _template: 'table', _replyto: data.email, _captcha: 'false' }),
+      body: JSON.stringify({
+        ...data,
+        _subject: `New ${data.topic} request from ${data.name}`,
+        _template: 'table',
+        _replyto: data.email,
+        _captcha: 'false',
+        // automatic confirmation email sent to the client
+        _autoresponse: `Hey ${data.name}, thanks for reaching out to Archived Studio! Your ${data.topic.toLowerCase()} request came through and I'll reply within a day with a quote and next steps. You can check the rate card anytime at ${SITE_URL}/#services. Talk soon, Archived Studio`,
+      }),
     });
     const out = await res.json().catch(() => ({}));
     if (!res.ok || out.success === 'false' || out.success === false) throw new Error(out.message || 'send failed');
+    showSent(data);
     form.reset();
-    statusEl.textContent = 'Message sent. I will reply by email within a day.';
-    statusEl.dataset.state = 'ok';
   } catch (err) {
     statusEl.innerHTML = '';
     statusEl.append('That did not go through. Email me directly at ');
@@ -145,6 +153,22 @@ form.addEventListener('submit', async (e) => {
     sendBtn.textContent = 'send message';
   }
 });
+
+function showSent(data) {
+  const body = form.querySelector('.reply-body');
+  const done = document.createElement('div');
+  done.className = 'reply-done';
+  done.setAttribute('tabindex', '-1');
+  const h = document.createElement('p'); h.className = 'done-title'; h.textContent = 'message sent.';
+  const p1 = document.createElement('p'); p1.textContent = `Thanks, ${data.name}. Your ${data.topic.toLowerCase()} request is in.`;
+  const p2 = document.createElement('p'); p2.textContent = `A confirmation is on its way to ${data.email}, and I'll reply with a quote and next steps within a day.`;
+  const again = document.createElement('button'); again.type = 'button'; again.className = 'btn btn-line'; again.textContent = 'send another message';
+  again.addEventListener('click', () => { done.remove(); body.hidden = false; statusEl.textContent = ''; form.querySelector('#f-name').focus(); });
+  done.append(h, p1, p2, again);
+  body.hidden = true;
+  body.after(done);
+  done.focus();
+}
 
 /* ---------- Stat count-up ---------- */
 if (!reduced) {

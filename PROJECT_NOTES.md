@@ -29,11 +29,11 @@ Portfolio for Archived Studio (formerly VANTA): game graphics for Roblox games (
 - Websites section: add each new site as an `<li class="site">` in `#websites`.
 
 ## Open items
-- Contact: reply card form posts to FormSubmit (`CONTACT_EMAIL` at top of main.js). Email is still a placeholder (user making a business Gmail). First real submission sends a one-time activation email.
+- Contact: business email archivedstudio.mke@gmail.com. Reply card posts to FormSubmit ajax (`CONTACT_EMAIL` in main.js) with `_autoresponse` (automatic confirmation email to the client) and shows an on-site 'message sent.' panel. First real submission sends a one-time FormSubmit activation email that must be clicked. Notifications arrive from FormSubmit (submissions@formsubmit.co).
 - Discord: japanesefriends. Instagram: @noticedyaa.
 - Websites entry for this site has a drawn mock; swap in a real screenshot later.
 - Live: https://archived-studio.vercel.app (Vercel project archived-studio, auto-deploys from GitHub main).
-- On GitHub the images sit at the repo root (web upload flattened `work/`); `vercel.json` rewrites `/work/:file` to `/:file` so paths still work. Locally they are in `work/`. Claude cannot push yet (GitHub not connected to Claude); updates go through the GitHub web UI or user upload.
+- Claude is connected to GitHub as arvchived and pushes directly to `main`; Vercel auto-deploys every push (~1 min). Images live in `work/`. Cache for /work is 1 day (not immutable) because filenames get reused when art is re-exported.
 
 ## How to add work
 1. Export webp: full (max 1600px) and `-sm` (max 768px) into `/work`.
