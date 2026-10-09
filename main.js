@@ -460,11 +460,9 @@ async function init3D() {
   }
 
   // stop rendering once the solid sections cover the canvas
-  let active = true;
-  ScrollTrigger.create({
-    trigger: '.archive', start: 'top top',
-    onEnter: () => (active = false), onLeaveBack: () => (active = true),
-  });
+  // pause rendering while the solid archive section fully covers the canvas
+  const archiveEl = document.querySelector('.archive');
+  const covered = () => archiveEl.getBoundingClientRect().top <= 0;
 
   /* ---------- Input ---------- */
   window.addEventListener('pointermove', (e) => {
@@ -489,7 +487,7 @@ async function init3D() {
   const ease = (x) => x * x * (3 - 2 * x);
 
   function frame() {
-    if (!active || document.hidden) return;
+    if (document.hidden || covered()) return;
     const t = clock.getElapsedTime();
     uTime.value = reduced ? 0 : t;
 
