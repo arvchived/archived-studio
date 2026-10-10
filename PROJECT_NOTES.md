@@ -35,7 +35,7 @@ Portfolio for Archived Studio (formerly VANTA): game graphics for Roblox games (
 - Contact: business email archivedstudio.mke@gmail.com. Reply card posts to FormSubmit ajax (`CONTACT_EMAIL` in main.js) with `_autoresponse` (automatic confirmation email to the client) and shows an on-site 'message sent.' panel. Clients pick email or phone/text; autoresponse only goes out when they chose email. First real submission sends a one-time FormSubmit activation email that must be clicked. Notifications arrive from FormSubmit (submissions@formsubmit.co).
 - Discord: japanesefriends. Instagram: @noticedyaa.
 - Websites entry for this site uses a real screenshot (`work/site-archived-studio.webp`).
-- Gmail (archivedstudio.mke@gmail.com): 'Archived Studio' signature is the default; filter from:(formsubmit.co) stars, labels 'Client requests' and never spams. Reply templates (Quote, Payment & start, Files delivered) in progress.
+- Gmail (archivedstudio.mke@gmail.com): 'Archived Studio' signature is the default; filter from:(formsubmit.co) stars, labels 'Client requests' and never spams. Reply templates saved: 'Quote' (price + how it works), 'Payment' (total + [PAYMENT METHOD] placeholder, final files after payment), 'Files delivered' (final files + tag @noticedyaa). Insert via compose > More options > Templates.
 - Testimonials (#6 on the header cheat sheet) deferred: owner is asking 'rel' first.
 - Waiting on owner: click the FormSubmit activation email, confirm the draft policies, give a payment method for the payment template, optional custom domain.
 - Live: https://archived-studio.vercel.app (Vercel project archived-studio, auto-deploys from GitHub main).
