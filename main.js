@@ -361,14 +361,14 @@ async function init3D() {
   fitParticles();
 
   /* ---------- 2. Chrome centerpiece: the studio's blackletter "a" ---------- */
-  const shapeMat = new THREE.MeshPhysicalMaterial({ color: 0xd4dbea, metalness: 1, roughness: 0.14, clearcoat: 1, clearcoatRoughness: 0.08, envMapIntensity: 1.35 });
+  const shapeMat = new THREE.MeshPhysicalMaterial({ color: 0xdfe5f2, metalness: 1, roughness: 0.09, clearcoat: 1, clearcoatRoughness: 0.05, envMapIntensity: 1.7 });
   const shape = new THREE.Group();
   shape.scale.setScalar(0.0001);
   scene.add(shape);
   new TTFLoader().load('fonts/grenze-a.ttf', (json) => {
     const geo = new TextGeometry('a', {
-      font: new Font(json), size: 2.4, depth: 0.55, curveSegments: 16,
-      bevelEnabled: true, bevelThickness: 0.12, bevelSize: 0.06, bevelSegments: 8,
+      font: new Font(json), size: 4.6, depth: 1.0, curveSegments: 20,
+      bevelEnabled: true, bevelThickness: 0.2, bevelSize: 0.1, bevelSegments: 10,
     });
     geo.computeBoundingBox();
     const bb = geo.boundingBox;
