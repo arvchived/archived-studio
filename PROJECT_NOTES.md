@@ -37,7 +37,8 @@ Portfolio for Archived Studio (formerly VANTA): game graphics for Roblox games (
 - Websites entry for this site uses a real screenshot (`work/site-archived-studio.webp`).
 - Gmail (archivedstudio.mke@gmail.com): 'Archived Studio' signature is the default; filter from:(formsubmit.co) stars, labels 'Client requests' and never spams. Reply templates saved: 'Quote' (price + how it works), 'Payment' (total + [PAYMENT METHOD] placeholder, final files after payment), 'Files delivered' (final files + tag @noticedyaa). Insert via compose > More options > Templates.
 - Testimonials (#6 on the header cheat sheet) deferred: owner is asking 'rel' first.
-- Waiting on owner: click the FormSubmit activation email, confirm the draft policies, give a payment method for the payment template, optional custom domain.
+- FormSubmit form is activated (Oct 2026). Payment methods: Cash App, Venmo, Chime, PayPal (more coming); listed in the payment policy and the Gmail Payment template.
+- Waiting on owner: confirm the draft policies, payment handles for the template, optional custom domain.
 - Live: https://archived-studio.vercel.app (Vercel project archived-studio, auto-deploys from GitHub main).
 - Claude is connected to GitHub as arvchived and pushes directly to `main`; Vercel auto-deploys every push (~1 min). Images live in `work/`. Cache for /work is 1 day (not immutable) because filenames get reused when art is re-exported.
 
