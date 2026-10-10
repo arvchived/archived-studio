@@ -1,5 +1,8 @@
 import * as THREE from 'three';
 import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+import { TTFLoader } from 'three/addons/loaders/TTFLoader.js';
+import { Font } from 'three/addons/loaders/FontLoader.js';
+import { TextGeometry } from 'three/addons/geometries/TextGeometry.js';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Lenis from 'lenis';
@@ -357,20 +360,22 @@ async function init3D() {
   }
   fitParticles();
 
-  /* ---------- 2. Chrome centerpiece ---------- */
-  const shapeMat = new THREE.MeshPhysicalMaterial({ color: 0xcfd6e6, metalness: 1, roughness: 0.16, clearcoat: 1, clearcoatRoughness: 0.1, envMapIntensity: 1.2 });
-  shapeMat.onBeforeCompile = (sh) => {
-    sh.uniforms.uTime = uTime;
-    sh.vertexShader = 'uniform float uTime;\n' + sh.vertexShader.replace(
-      '#include <begin_vertex>',
-      `#include <begin_vertex>
-       float w = sin(position.x*2.6 + uTime*1.1) * sin(position.y*2.9 + uTime*0.9) * sin(position.z*2.2 + uTime*0.7);
-       transformed += normal * w * 0.12;`
-    );
-  };
-  const shape = new THREE.Mesh(new THREE.TorusKnotGeometry(1.15, 0.38, isSmall() ? 160 : 260, isSmall() ? 24 : 40), shapeMat);
+  /* ---------- 2. Chrome centerpiece: the studio's blackletter "a" ---------- */
+  const shapeMat = new THREE.MeshPhysicalMaterial({ color: 0xd4dbea, metalness: 1, roughness: 0.14, clearcoat: 1, clearcoatRoughness: 0.08, envMapIntensity: 1.35 });
+  const shape = new THREE.Group();
   shape.scale.setScalar(0.0001);
   scene.add(shape);
+  new TTFLoader().load('fonts/grenze-a.ttf', (json) => {
+    const geo = new TextGeometry('a', {
+      font: new Font(json), size: 2.4, depth: 0.55, curveSegments: 16,
+      bevelEnabled: true, bevelThickness: 0.12, bevelSize: 0.06, bevelSegments: 8,
+    });
+    geo.computeBoundingBox();
+    const bb = geo.boundingBox;
+    geo.translate(-(bb.min.x + bb.max.x) / 2, -(bb.min.y + bb.max.y) / 2, -(bb.min.z + bb.max.z) / 2);
+    geo.computeVertexNormals();
+    shape.add(new THREE.Mesh(geo, shapeMat));
+  });
   const keyY = new THREE.PointLight(0xffc53d, 40, 20); keyY.position.set(4, 3, 4); scene.add(keyY);
   const keyB = new THREE.PointLight(0x3d5cff, 60, 20); keyB.position.set(-4, -2, 3); scene.add(keyB);
 
@@ -538,8 +543,8 @@ async function init3D() {
     shape.position.x = wide ? vis.w * 0.27 : vis.w * 0.26;
     shape.position.y = wide ? 0 : vis.h * 0.3;
     tilt.lerp(pointer, 0.05);
-    shape.rotation.x = t * 0.18 + tilt.y * 0.4 + S.scatter * 1.2;
-    shape.rotation.y = t * 0.24 + tilt.x * 0.6;
+    shape.rotation.x = Math.sin(t * 0.6) * 0.12 - tilt.y * 0.35;
+    shape.rotation.y = t * 0.55 + tilt.x * 0.7;
 
     // flight
     gallery.visible = f > 0.001;
