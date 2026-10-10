@@ -298,18 +298,15 @@ main, .nav, .foot { position: relative; z-index: 1; }
 .item .desc { grid-column: 1 / -1; margin: 6px 0 0; font-size: .9rem; font-weight: 500; color: var(--slate-dark); max-width: 40ch; }
 
 .menu-foot { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px; padding: 18px 28px; background: var(--paper); border-top: 1px solid var(--line-light); font-weight: 600; }
+.menu-pay { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px 22px; padding: 16px 28px; border-top: 1.5px dashed var(--line-light); }
+.menu-pay-label { font: 800 1.35rem/1 var(--f-black); text-transform: lowercase; }
+.menu-pay-list { display: flex; flex-wrap: wrap; align-items: baseline; list-style: none; margin: 0; padding: 0; font: 800 .92rem var(--f); text-transform: lowercase; }
+.menu-pay-list li + li::before { content: ""; display: inline-block; width: 5px; height: 5px; border-radius: 50%; background: var(--court); margin: 0 12px; vertical-align: middle; position: relative; top: -2px; }
+.menu-pay-note { margin-left: auto; font-size: .82rem; font-weight: 500; color: var(--slate-dark); }
+@media (max-width: 720px) { .menu-pay { padding: 16px 22px; } .menu-pay-note { margin-left: 0; width: 100%; } }
 .menu .btn-solid { background: var(--ink); color: var(--paper); }
 .menu .btn-solid:hover { background: var(--volt); }
 .menu :focus-visible { outline-color: var(--volt); }
-
-/* ---------- Ways to pay ---------- */
-.pay { margin-top: clamp(24px, 3vw, 36px); display: flex; flex-wrap: wrap; align-items: center; gap: 12px 18px; padding: 16px 0; border-top: 1px solid var(--line-dark); border-bottom: 1px solid var(--line-dark); }
-.pay-label { font: 700 .72rem var(--f); letter-spacing: .14em; text-transform: lowercase; color: var(--court); }
-.pay-chips { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; margin: 0; padding: 0; }
-.pay-chips li { display: inline-flex; align-items: center; gap: 7px; height: 32px; padding: 0 13px; border-radius: 999px; border: 1px solid var(--line-dark); background: var(--ink-2); color: var(--paper); font: 600 .82rem var(--f); text-transform: lowercase; }
-.pay-chips svg { width: 14px; height: 14px; color: var(--court); flex: none; }
-.pay-note { margin-left: auto; color: var(--text-dim); font-size: .85rem; font-weight: 500; }
-@media (max-width: 720px) { .pay-note { margin-left: 0; width: 100%; } }
 
 /* ---------- About ---------- */
 .about { background: var(--paper); color: var(--ink); padding: clamp(80px, 12vw, 140px) 0; }
