@@ -28,7 +28,7 @@ Portfolio for Archived Studio (formerly VANTA): game graphics for Roblox games (
 - Reduced motion: no Lenis, no flight section, static scene. No WebGL: `.no-webgl` gradient fallback.
 
 ## Content
-- Prices (USD): thumbnail + icon package $25, thumbnail or icon alone $15 each, graphic designs $20 (no POTW/TOTW wording; clients send details), flyers $10, standard website $50 + $25/month, 3D website $70 + $25/month (upkeep is $25/month for either: hosting, updates, fixes), clothing design bundle $40, logo bundle $15. No social/video service (user removed it).
+- Prices (USD): thumbnail + icon package $25, thumbnail or icon alone $15 each, graphic designs $20 (no POTW/TOTW wording; clients send details), flyers $10, standard website $70 + $15/month, 3D website $100 + $15/month (upkeep is $15/month for either: hosting, updates, fixes; changed Oct 2026 from $50/$70 + $25), clothing design bundle $40, logo bundle $15. No social/video service (user removed it).
 - Stats: 80M+ Roblox visits across games designed for, 20K+ YouTube views.
 - Work sorted by size: 16:9 = Game thumbnails, 512x512 = Game icons, 4:5 = Posters. Files in `/work`, each with a full and a `-sm` version (webp).
 - Websites section: add each new site as an `<li class="site">` in `#websites`.
