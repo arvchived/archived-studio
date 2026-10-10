@@ -25,13 +25,14 @@ Portfolio for Archived Studio (formerly VANTA): game graphics for Roblox games (
 - Custom scrollbar (court-yellow thumb on ink).
 - Footer: site/contact columns + policies accordion (DRAFT policies, need owner confirmation: payment, revisions (2 rounds), usage & credit, privacy. Owner removed the refunds item: don't add refund wording anywhere).
 - Rendering stops once `.archive` (solid paper) covers the canvas.
+- The 3D flight has a visible 'skip to the gallery' link (bottom right of the pinned frame); the section is no longer aria-hidden, only its title/caption are.
 - Reduced motion: no Lenis, no flight section, static scene. No WebGL: `.no-webgl` gradient fallback.
 
 ## Content
 - Prices (USD): thumbnail + icon package $25, thumbnail or icon alone $15 each, graphic designs $20 (no POTW/TOTW wording; clients send details), flyers $10, standard website $70 + $15/month, 3D website $100 + $15/month (upkeep is $15/month for either: hosting, updates, fixes; changed Oct 2026 from $50/$70 + $25), clothing design bundle $40, logo bundle $15. No social/video service (user removed it).
 - Stats: 80M+ Roblox visits across games designed for, 20K+ YouTube views.
 - Work sorted by size: 16:9 = Game thumbnails, 512x512 = Game icons, 4:5 = Posters. Files in `/work`, each with a full and a `-sm` version (webp).
-- Websites section: add each new site as an `<li class="site">` in `#websites`.
+- Websites section: add each new site as an `<li class="site">` in `#websites` (two-up grid; the dashed 'your site could go here' card spans the full row underneath). Elev8 Barbershop added Oct 2026 (work/site-elev8.webp = its 'Pick your barber' section).
 
 ## Open items
 - Contact: business email archivedstudio.mke@gmail.com. Reply card posts to FormSubmit ajax (`CONTACT_EMAIL` in main.js) with `_autoresponse` (automatic confirmation email to the client) and shows an on-site 'message sent.' panel. Clients pick email or phone/text; autoresponse only goes out when they chose email. First real submission sends a one-time FormSubmit activation email that must be clicked. Notifications arrive from FormSubmit (submissions@formsubmit.co).
