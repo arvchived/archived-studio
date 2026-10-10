@@ -13,9 +13,12 @@ Portfolio for Archived Studio (formerly VANTA): game graphics for Roblox games (
 ## Design system
 - Colors: ink `#0C1322`, ink-2 `#16203A`, paper `#E8EBF1`, court yellow `#FFC53D`, volt blue `#3D5CFF`, slate `#8B94A7`.
 - Type: Grenze Gotisch (blackletter, lowercase) for headings/wordmark, the user's stand-in for Duc De Berry. Montserrat for ALL information text, labels, prices and stats (user wants Gotham family; Gotham has no free web license, Montserrat is the stand-in, 900 = Gotham Black). Anton/Plus Jakarta/Space Mono removed.
-- Hero: full-screen, the particle word 'archived' fills the `.hero-word` box (user wants it BIG). Tagline, intro copy and buttons live in the `.intro` section right under the hero, before the stats/chrome shape. Header is a floating pill bar that hides on scroll down.
-- Stats: left 52%, chrome torus knot fills the right half.
-- Flight: full-res images baked with a corner 'archived' signature + shader holographic tiled watermark with a sweeping gold/blue sheen.
+- Hero: full-screen, the particle word 'archived' is fitted to the measured ink bounds of the `.hero-word` box (user wants it BIG). Tagline, intro copy and buttons live in the `.intro` section right under the hero, before the stats/chrome logo.
+- Header: minimalist floating pill (cheat-sheet style #2): links left (work, websites, rates), wordmark centered, contact + 'start a project' CTA right. Hides on scroll down; under 860px it collapses to logo + CTA.
+- Stats: 80M+ / 20K+ stacked on the left (max 46%). The chrome 3D logo (blackletter 'a', extruded in three.js from `fonts/grenze-a.ttf`, a 1.5KB subset of Grenze Gotisch 800) spins on the right and follows the cursor; hidden under 720px. Blender isn't available in the container, so the logo is built from the font at runtime.
+- Flight: full-res images baked with a corner 'archived' signature + shader holographic tiled watermark with a sweeping gold/blue sheen. Textures load lazily (when `.proof` is within 600px, or on idle) so they don't compete with first paint.
+- Rate card: the 'menu' version (commit 0fb33e4): header line, 3 numbered steps on a dashed line, three menu columns (game graphics, design, websites) with the $25 package flagged best value. Other versions (ruled steps, influencer poster sheet) were rejected; don't bring them back.
+- Brand assets: favicon.ico + icons/ (yellow blackletter 'a' on an ink rounded square), site.webmanifest, icons/og-image.jpg (1200x630 share preview). Vercel Web Analytics is on (`/_vercel/insights/script.js`).
 - Grid/lightbox images: `.frame` overlay with tiled watermark (canvas-generated `--wm`) + animated corner signature. Right-click disabled on images.
 - Custom scrollbar (court-yellow thumb on ink).
 - Footer: site/contact columns + policies accordion (DRAFT policies, need owner confirmation: payment, revisions (2 rounds), refunds, usage & credit, privacy).
@@ -31,7 +34,10 @@ Portfolio for Archived Studio (formerly VANTA): game graphics for Roblox games (
 ## Open items
 - Contact: business email archivedstudio.mke@gmail.com. Reply card posts to FormSubmit ajax (`CONTACT_EMAIL` in main.js) with `_autoresponse` (automatic confirmation email to the client) and shows an on-site 'message sent.' panel. Clients pick email or phone/text; autoresponse only goes out when they chose email. First real submission sends a one-time FormSubmit activation email that must be clicked. Notifications arrive from FormSubmit (submissions@formsubmit.co).
 - Discord: japanesefriends. Instagram: @noticedyaa.
-- Websites entry for this site has a drawn mock; swap in a real screenshot later.
+- Websites entry for this site uses a real screenshot (`work/site-archived-studio.webp`).
+- Gmail (archivedstudio.mke@gmail.com): 'Archived Studio' signature is the default; filter from:(formsubmit.co) stars, labels 'Client requests' and never spams. Reply templates (Quote, Payment & start, Files delivered) in progress.
+- Testimonials (#6 on the header cheat sheet) deferred: owner is asking 'rel' first.
+- Waiting on owner: click the FormSubmit activation email, confirm the draft policies, give a payment method for the payment template, optional custom domain.
 - Live: https://archived-studio.vercel.app (Vercel project archived-studio, auto-deploys from GitHub main).
 - Claude is connected to GitHub as arvchived and pushes directly to `main`; Vercel auto-deploys every push (~1 min). Images live in `work/`. Cache for /work is 1 day (not immutable) because filenames get reused when art is re-exported.
 

@@ -445,10 +445,27 @@ async function init3D() {
       mat.uniforms.uAspect.value = mesh.userData.aspect;
       layoutCards();
     };
-    img.src = `${p.src}${isSmall() ? '-sm' : ''}.webp`;
+    mesh.userData.load = () => { if (!img.src) img.src = `${p.src}${isSmall() ? '-sm' : ''}.webp`; };
     gallery.add(mesh);
     return mesh;
   });
+  // Flight artwork is heavy: fetch it once the visitor heads toward the walk,
+  // or when the browser goes idle, instead of competing with the first paint.
+  let cardsLoading = false;
+  const loadCards = () => {
+    if (cardsLoading) return;
+    cardsLoading = true;
+    cards.forEach((m) => m.userData.load());
+  };
+  const proofEl = document.querySelector('.proof');
+  if (proofEl && 'IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      if (entries.some((e) => e.isIntersecting)) { loadCards(); io.disconnect(); }
+    }, { rootMargin: '600px 0px' });
+    io.observe(proofEl);
+  }
+  if ('requestIdleCallback' in window) requestIdleCallback(loadCards, { timeout: 4000 });
+  else setTimeout(loadCards, 2500);
   const FLIGHT_START = -2; // first card's z
   function layoutCards() {
     const small = isSmall();
