@@ -18,11 +18,11 @@ Portfolio for Archived Studio (formerly VANTA): game graphics for Roblox games (
 - Stats: 80M+ / 20K+ stacked on the left (max 46%). The chrome torus knot spins on the right and follows the cursor; hidden under 720px. (A chrome blackletter 'a' was tried in Oct 2026 and the owner asked to go back to the knot.)
 - Flight: full-res images baked with a corner 'archived' signature + shader holographic tiled watermark with a sweeping gold/blue sheen. Textures load lazily (when `.proof` is within 600px, or on idle) so they don't compete with first paint.
 - Rate card: the 'menu' version (commit 0fb33e4): header line, 3 numbered steps on a dashed line, three menu columns (game graphics, design, websites) with the $25 package flagged best value. Other versions (ruled steps, influencer poster sheet) were rejected; don't bring them back.
-- Ways to pay: block at the end of `#services` (inspired by a fintech 'trusted partners' tile grid the owner sent): '4 apps' stat, four court-yellow tiles (cash app, venmo, chime, paypal) with our own simple glyphs (no brand logos), and a 'start a project' CTA. Handles are NOT shown on the site; the pay links live only in the Gmail Payment template.
+- Ways to pay: one slim row under the rate card (label + four small chips: cash app, venmo, chime, paypal, with our own simple glyphs, no brand logos). Owner rejected a big tile grid version as too bulky. Handles are NOT shown on the site; the pay links live only in the Gmail Payment template.
 - Brand assets: favicon.ico + icons/ (yellow blackletter 'a' on an ink rounded square), site.webmanifest, icons/og-image.jpg (1200x630 share preview). Vercel Web Analytics is on (`/_vercel/insights/script.js`).
 - Grid/lightbox images: `.frame` overlay with tiled watermark (canvas-generated `--wm`) + animated corner signature. Right-click disabled on images.
 - Custom scrollbar (court-yellow thumb on ink).
-- Footer: site/contact columns + policies accordion (DRAFT policies, need owner confirmation: payment, revisions (2 rounds), refunds, usage & credit, privacy).
+- Footer: site/contact columns + policies accordion (DRAFT policies, need owner confirmation: payment, revisions (2 rounds), usage & credit, privacy. Owner removed the refunds item: don't add refund wording anywhere).
 - Rendering stops once `.archive` (solid paper) covers the canvas.
 - Reduced motion: no Lenis, no flight section, static scene. No WebGL: `.no-webgl` gradient fallback.
 
