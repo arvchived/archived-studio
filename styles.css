@@ -173,7 +173,7 @@ main, .nav, .foot { position: relative; z-index: 1; }
 .flight-title { font: 700 clamp(2.4rem, 1.4rem + 3vw, 4.4rem)/1 var(--f-black); }
 .flight-caption { display: flex; gap: 16px; align-items: baseline; font-size: var(--step-1); font-weight: 600; }
 .flight-foot { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; flex-wrap: wrap; }
-.flight-skip { pointer-events: auto; color: var(--court); font-weight: 700; font-size: .95rem; text-underline-offset: 5px; padding: 10px 0; }
+.flight-skip { pointer-events: auto; display: inline-block; color: var(--court); font-weight: 700; font-size: .95rem; text-underline-offset: 5px; padding: 9px 14px; border-radius: 999px; background: rgba(8, 14, 32, .72); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
 .flight-skip:hover { color: var(--paper); }
 .fc-count { color: var(--court); font: 800 .85rem var(--f); letter-spacing: .08em; min-width: 5.5em; }
 .no-webgl .flight, .reduced .flight { display: none; }
